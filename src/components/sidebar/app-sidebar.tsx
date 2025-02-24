@@ -11,8 +11,8 @@ import {
   SwatchBook,
 } from "lucide-react";
 
-import { NavMain } from "@/components/nav-main";
-import { NavWorkspaces } from "@/components/nav-workspaces";
+import { NavMain } from "@/components/sidebar/nav-main";
+import { NavWorkspaces } from "@/components/sidebar/nav-workspaces";
 // import { NavFavorites } from "@/components/nav-favorites";
 // import { NavSecondary } from "@/components/nav-secondary";
 // import { TeamSwitcher } from "@/components/team-switcher";
@@ -25,9 +25,9 @@ import {
   SidebarMenuButton,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
-import { ProfileActions } from "./profile-actions";
+import { ProfileActions } from "@/components/sidebar/profile-actions";
 
 const data = {
   navMain: [

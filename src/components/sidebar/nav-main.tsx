@@ -1,25 +1,34 @@
-"use client"
+"use client";
 
-import { type LucideIcon } from "lucide-react"
+import { CirclePlus, type LucideIcon } from "lucide-react";
 
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { AddTaskDialog } from "./add-task/add-task-dialog";
 
 export function NavMain({
   items,
 }: {
   items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
-  }[]
+    title: string;
+    url: string;
+    icon: LucideIcon;
+    isActive?: boolean;
+  }[];
 }) {
   return (
     <SidebarMenu>
+      <SidebarMenuItem>
+        <AddTaskDialog>
+          <SidebarMenuButton className="text-primary">
+            <CirclePlus className="!size-5" strokeWidth={1.5} />
+            <span>Add Task</span>
+          </SidebarMenuButton>
+        </AddTaskDialog>
+      </SidebarMenuItem>
       {items.map((item) => (
         <SidebarMenuItem key={item.title}>
           <SidebarMenuButton asChild isActive={item.isActive}>
@@ -31,5 +40,5 @@ export function NavMain({
         </SidebarMenuItem>
       ))}
     </SidebarMenu>
-  )
+  );
 }

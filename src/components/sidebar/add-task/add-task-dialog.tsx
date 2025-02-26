@@ -11,6 +11,9 @@ import {
 import { PriorityPopover } from "./priority-popover";
 import { RemindersPopover } from "./reminders-popover";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { DatePopover } from "./date-popover";
+import { MorePopover } from "./more-popover";
+import { ProjectSelect } from "./project-select";
 
 export function AddTaskDialog({ children }: { children: React.ReactNode }) {
   return (
@@ -33,15 +36,15 @@ export function AddTaskDialog({ children }: { children: React.ReactNode }) {
           />
 
           <div className="flex items-center gap-2 mt-2">
+            <DatePopover />
             <PriorityPopover />
             <RemindersPopover />
+            <MorePopover />
           </div>
         </DialogHeader>
 
         <DialogFooter className="border-t p-4 flex sm:justify-between items-center">
-          <Button size={"sm"} variant={"outline"}>
-            Inbox
-          </Button>
+          <ProjectSelect />
 
           <div className="space-x-2">
             <DialogClose asChild>

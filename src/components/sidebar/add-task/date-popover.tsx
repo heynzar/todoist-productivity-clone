@@ -1,4 +1,5 @@
 "use client";
+import { JSX, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -61,6 +62,77 @@ const getDateLabels = () => {
 };
 
 export function DatePopover() {
+  const [buttonTitle, setButtonTitle] = useState<JSX.Element>(
+    <p className="text-green-500 flex items-center gap-1">
+      <CalendarIcon />
+      <span>Today</span>
+    </p>
+  );
+
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [open, setOpen] = useState(false);
+
+  const dates = getDateLabels();
+
+  const handleTitleChange = (title: string, subTitle: string) => {
+    let newTitle;
+    switch (title) {
+      case "Tomorrow":
+        newTitle = (
+          <p className="text-yellow-600 flex items-center gap-1">
+            <Sun />
+            <span>{subTitle}</span>
+          </p>
+        );
+        break;
+      case "Next Week":
+        newTitle = (
+          <p className="text-violet-600 flex items-center gap-1">
+            <CalendarArrowUp />
+            <span>{subTitle}</span>
+          </p>
+        );
+        break;
+      case "Next Weekend":
+        newTitle = (
+          <p className="text-neutral-600 flex items-center gap-1">
+            <Armchair />
+            <span>{subTitle}</span>
+          </p>
+        );
+        break;
+      default:
+        newTitle = (
+          <p className="text-green-600 flex items-center gap-1">
+            <CalendarIcon />
+            <span>{subTitle}</span>
+          </p>
+        );
+    }
+
+    setButtonTitle(newTitle);
+    setOpen(false);
+  };
+
+  const handleDateSelection = (selectedDate: Date | undefined) => {
+    if (selectedDate) {
+      setDate(selectedDate);
+      setButtonTitle(
+        <p className="text-blue-600 flex items-center gap-1">
+          <CalendarIcon />
+          <span>
+            {selectedDate.toLocaleDateString("en-US", {
+              weekday: "long",
+              month: "short",
+              day: "numeric",
+            })}
+          </span>
+        </p>
+      );
+      setOpen(false);
+    }
+  };
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

@@ -8,6 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { AddTaskDialog } from "./add-task/add-task-dialog";
+import { useTasks } from "@/context/TasksContext";
 
 export function NavMain({
   items,
@@ -19,16 +20,10 @@ export function NavMain({
     isActive?: boolean;
   }[];
 }) {
+  const { addTask } = useTasks();
+
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <AddTaskDialog>
-          <SidebarMenuButton className="text-primary">
-            <CirclePlus className="!size-5" strokeWidth={1.5} />
-            <span>Add Task</span>
-          </SidebarMenuButton>
-        </AddTaskDialog>
-      </SidebarMenuItem>
+    <SidebarMenu className="mt-2 mb-4">
       {items.map((item) => (
         <SidebarMenuItem key={item.title}>
           <SidebarMenuButton asChild isActive={item.isActive}>
@@ -39,6 +34,14 @@ export function NavMain({
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}
+      <SidebarMenuItem className="mt-4">
+        <AddTaskDialog addTask={addTask}>
+          <SidebarMenuButton className="text-primary bg-muted hover:bg-muted/50 justify-center border border-dashed">
+            <CirclePlus strokeWidth={1.5} />
+            <span>Add Task</span>
+          </SidebarMenuButton>
+        </AddTaskDialog>
+      </SidebarMenuItem>
     </SidebarMenu>
   );
 }

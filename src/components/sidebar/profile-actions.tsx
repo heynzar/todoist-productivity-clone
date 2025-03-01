@@ -35,52 +35,26 @@ import {
 const data = [
   [
     {
-      label: "Nzar",
-      icon: TrendingUp,
-    },
-  ],
-  [
-    {
       label: "Settings",
       icon: Settings,
-    },
-    {
-      label: "Add a team",
-      icon: Plus,
-    },
-  ],
-  [
-    {
-      label: "Activity log",
-      icon: Activity,
-    },
-    {
-      label: "Print",
-      icon: Printer,
     },
     {
       label: "Resources",
       icon: BookOpen,
     },
-  ],
-  [
     {
       label: "What's new",
       icon: ArrowUp,
     },
   ],
+
   [
     {
       label: "Upgrade to Pro",
       icon: BadgeCheck,
     },
   ],
-  [
-    {
-      label: "Sync",
-      icon: RefreshCcw,
-    },
-  ],
+
   [
     {
       label: "Log out",
@@ -92,10 +66,6 @@ const data = [
 export function ProfileActions() {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    setIsOpen(true);
-  }, []);
-
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
@@ -104,7 +74,7 @@ export function ProfileActions() {
           size="icon"
           className="h-7 px-2 w-max data-[state=open]:bg-accent"
         >
-          <Avatar className="size-6">
+          <Avatar className="size-5 rounded-lg">
             <AvatarImage src="https://avatars.githubusercontent.com/u/98880087" />
             <AvatarFallback>NZ</AvatarFallback>
           </Avatar>

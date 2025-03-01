@@ -24,54 +24,37 @@ export function NavWorkspaces({
   workspaces: {
     name: string;
     emoji: React.ReactNode;
-    pages: {
-      name: string;
-      emoji: React.ReactNode;
-    }[];
   }[];
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>My Projects</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {workspaces.map((workspace) => (
-            <Collapsible key={workspace.name}>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href="#">
-                    <span>{workspace.emoji}</span>
-                    <span>{workspace.name}</span>
-                  </a>
-                </SidebarMenuButton>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuAction
-                    className="left-2 bg-sidebar-accent text-sidebar-accent-foreground data-[state=open]:rotate-90"
-                    showOnHover
-                  >
-                    <ChevronRight />
-                  </SidebarMenuAction>
-                </CollapsibleTrigger>
-                <SidebarMenuAction showOnHover>
-                  <Plus />
+          <Collapsible defaultOpen>
+            <SidebarMenuItem>
+              <SidebarGroupLabel>My Goals</SidebarGroupLabel>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuAction className="right-0 bg-sidebar-accent text-sidebar-accent-foreground data-[state=open]:rotate-90">
+                  <ChevronRight />
                 </SidebarMenuAction>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {workspace.pages.map((page) => (
-                      <SidebarMenuSubItem key={page.name}>
-                        <SidebarMenuSubButton asChild>
-                          <a href="#">
-                            <span>{page.emoji}</span>
-                            <span>{page.name}</span>
-                          </a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-          ))}
+              </CollapsibleTrigger>
+
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {workspaces.map((goal) => (
+                    <SidebarMenuSubItem key={goal.name}>
+                      <SidebarMenuSubButton asChild className="px-1">
+                        <a href="#">
+                          <span>{goal.emoji}</span>
+                          <span>{goal.name}</span>
+                        </a>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </SidebarMenuItem>
+          </Collapsible>
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

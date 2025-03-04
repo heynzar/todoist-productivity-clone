@@ -13,14 +13,14 @@ import {
 export function ProjectSelect() {
   return (
     <Select>
-      <SelectTrigger className="w-24">
-        <SelectValue placeholder="Inbox" />
+      <SelectTrigger className="w-52 shadow-none border-neutral-400 h-8">
+        <SelectValue placeholder="Select Goal" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Projects</SelectLabel>
-          <SelectItem value="inbox">Inbox</SelectItem>
-          <SelectItem value="project1">project 1</SelectItem>
+          <SelectLabel>Goals</SelectLabel>
+          <SelectItem value="inbox">Goal 1</SelectItem>
+          <SelectItem value="project1">Goal 2</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

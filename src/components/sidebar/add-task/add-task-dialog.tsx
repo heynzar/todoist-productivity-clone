@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,15 +8,42 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { PriorityPopover } from "./priority-popover";
 import { RemindersPopover } from "./reminders-popover";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { DatePopover } from "./date-popover";
 import { MorePopover } from "./more-popover";
 import { ProjectSelect } from "./project-select";
+import { Task } from "@/context/TasksContext";
 
-export function AddTaskDialog({ children }: { children: React.ReactNode }) {
+export function AddTaskDialog({
+  children,
+  addTask,
+}: {
+  children: React.ReactNode;
+  addTask: (task: Task) => void;
+}) {
+  const [taskName, setTaskName] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleAddTask = () => {
+    if (!taskName.trim()) return; // Prevent adding empty tasks
+
+    const newTask: Task = {
+      id: Date.now(), // Generate a unique ID
+      task: taskName,
+      description,
+      date: "No Date", // Default value
+      priority: "p3", // Default priority
+      project: "inbox", // Default project
+      isCompleted: false,
+    };
+
+    addTask(newTask);
+    setTaskName(""); // Reset input
+    setDescription("");
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -24,15 +52,17 @@ export function AddTaskDialog({ children }: { children: React.ReactNode }) {
           <DialogTitle className="sr-only">Add Task</DialogTitle>
           <input
             type="text"
-            id="task-name"
             placeholder="Task Name"
             className="col-span-3 outline-none font-medium text-xl"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
           />
           <input
             type="text"
-            id="description"
             placeholder="Description"
             className="col-span-3 outline-none text-sm"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
 
           <div className="flex items-center gap-2 mt-2">
@@ -52,9 +82,11 @@ export function AddTaskDialog({ children }: { children: React.ReactNode }) {
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" size={"sm"}>
-              Add Task
-            </Button>
+            <DialogClose asChild>
+              <Button size={"sm"} onClick={handleAddTask}>
+                Add Task
+              </Button>
+            </DialogClose>
           </div>
         </DialogFooter>
       </DialogContent>
